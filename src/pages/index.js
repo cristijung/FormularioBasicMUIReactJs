@@ -15,34 +15,46 @@ import {
 import estilos from './index-form.css';
 
 function FormFront() {
-    const [lab, setLab] = React.useState('');
-    const handleChange = (event) => {
-      setLab(event.target.value);
-    };
+   
+    
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const data = {
+            firstName: e.target.elements.firstName.value,
+            properties: e.target.elements.properties,
+            initDate: e.target.elements.initDate,
+            finalDate: e.target.elements.finalDate,
+            lab: e.target.elements.lab,
+            onbservation: e.target.elements.onbservation,
+        }
+        console.log(data);
+    }
 
   
     return(
         <>
         <header className='header-form'>            
             Formulário FrontEnd 
-            <object align='right' className='header-button'>                
-            <Button>Salvar</Button>                 
+            <object align='right' style={{paddingRight:'5%'}}>                
+            <Button style={{color:'#fff'}}>Salvar</Button>                           
             </object>            
                      
-        </header>     
-        
+        </header>   
+           
+        <form onSubmit={onSubmit}>
         <Box className='container-form'>
         <Grid container>
             <Grid item xs={12} sm={6} md={6}>                
                     <TextField
                         required 
                         fullWidth
-                        id="nome" 
+                        name="firstName" 
                         label="Nome" 
                         variant="standard" 
                         color="success"
                         size="normal" 
-                        margin="normal"                                            
+                        margin="normal"
+                        
                     />                
             </Grid>
            
@@ -57,7 +69,7 @@ function FormFront() {
                 <label className="label-form">Data Inicial</label>
                 <Box>                    
                     <TextField
-                        id="date"
+                        name="initDate"
                         type="date"
                         variant="standard"
                     />
@@ -68,7 +80,7 @@ function FormFront() {
             <label className="label-form">Data Final</label>
                 <Box>                    
                     <TextField
-                        id="date"
+                        name="initDate"
                         type="date"
                         variant="standard"
                     />
@@ -85,9 +97,8 @@ function FormFront() {
                                 required
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={lab}
+                                name="properties"
                                 label="Lab"
-                                onChange={handleChange}
                                 color="success"
                                 >
                                 <MenuItem value={123}>Lab123</MenuItem>
@@ -104,9 +115,8 @@ function FormFront() {
                                 required
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={lab}
+                                name="lab"
                                 label="Lab"
-                                onChange={handleChange}
                                 color="success"
                                 >
                                 <MenuItem value={123}>Lab123</MenuItem>
@@ -133,6 +143,7 @@ function FormFront() {
             </Grid>            
         </Grid>
         </Box>
+        </form>
     </>       
 
     );
