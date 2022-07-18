@@ -1,5 +1,4 @@
 import * as React from 'react';
-//import { useState } from 'react';
 import { 
     Grid, 
     Box, 
@@ -11,44 +10,40 @@ import {
     } 
     from '@mui/material';
 //componente estilo está sendo usado pelo componente formulário
+//por este motivo desativei aqui o eslint
 // eslint-disable-next-line
 import estilos from './index-form.css';
+import { useForm } from 'react-hook-form';
 
 function FormFront() {
+
+    const {register, handleSubmit} = useForm();
    
     
-    const onSubmit = (e) => {
-        e.preventDefault();
-        const data = {
-            firstName: e.target.elements.firstName.value,
-            properties: e.target.elements.properties,
-            initDate: e.target.elements.initDate,
-            finalDate: e.target.elements.finalDate,
-            lab: e.target.elements.lab,
-            onbservation: e.target.elements.onbservation,
-        }
-        console.log(data);
+    const onSubmit = (e) => {        
+        console.log(e);
     }
 
   
     return(
         <>
+        <form onSubmit={handleSubmit(onSubmit)}>
         <header className='header-form'>            
             Formulário FrontEnd 
             <object align='right' style={{paddingRight:'5%'}}>                
-            <Button style={{color:'#fff'}}>Salvar</Button>                           
+            <Button style={{color:'#fff'}} type='submit'>Salvar</Button>                           
             </object>            
                      
         </header>   
            
-        <form onSubmit={onSubmit}>
+        
         <Box className='container-form'>
         <Grid container>
             <Grid item xs={12} sm={6} md={6}>                
                     <TextField
                         required 
                         fullWidth
-                        name="firstName" 
+                        {...register("firstName")} 
                         label="Nome" 
                         variant="standard" 
                         color="success"
@@ -69,7 +64,7 @@ function FormFront() {
                 <label className="label-form">Data Inicial</label>
                 <Box>                    
                     <TextField
-                        name="initDate"
+                        {...register("initDate")}
                         type="date"
                         variant="standard"
                     />
@@ -80,7 +75,7 @@ function FormFront() {
             <label className="label-form">Data Final</label>
                 <Box>                    
                     <TextField
-                        name="initDate"
+                        {...register("finalDate")}
                         type="date"
                         variant="standard"
                     />
@@ -97,12 +92,12 @@ function FormFront() {
                                 required
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                name="properties"
+                                {...register("properties")}
                                 label="Lab"
                                 color="success"
                                 >
-                                <MenuItem value={123}>Lab123</MenuItem>
-                                <MenuItem value={456}>Lab456</MenuItem>          
+                                <MenuItem value={123}>id-00123</MenuItem>
+                                <MenuItem value={456}>Complemento da moradia: 456</MenuItem>          
                                 </Select>
                         </FormControl>
                     </Box>             
@@ -115,12 +110,12 @@ function FormFront() {
                                 required
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                name="lab"
+                                {...register("lab")}
                                 label="Lab"
                                 color="success"
                                 >
-                                <MenuItem value={123}>Lab123</MenuItem>
-                                <MenuItem value={456}>Lab456</MenuItem>          
+                                <MenuItem value={123}>Lab-123</MenuItem>
+                                <MenuItem value={456}>Lab-456</MenuItem>          
                                 </Select>
                         </FormControl>
                     </Box>             
@@ -133,7 +128,8 @@ function FormFront() {
                         multiline 
                         fullWidth
                         rows={4}
-                        id="standard-basic" 
+                        id="standard-basic"
+                        {...register("observation")} 
                         variant="standard"
                         color="success"
                         size="normal" 
