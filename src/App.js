@@ -3,8 +3,7 @@ import FormFront from './pages/index'
 function App() {
   return (
     <div>
-      <header>
-       
+      <header>       
        <FormFront />
       </header>
     </div>
